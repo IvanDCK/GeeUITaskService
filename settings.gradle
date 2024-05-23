@@ -1,0 +1,24 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+rootProject.name = "GeeUITaskService"
+include ':app'
+include ':CommandLib'
+include ':GestureFactory'
+project(':CommandLib').projectDir = new File('GeeUIBase/CommandLib')
+project(':GestureFactory').projectDir = new File('GeeUIBase/GestureFactory')
+include ':Components'
+project(':Components').projectDir = new File('GeeUIComponents/Components')
+include ':CommChannel'
+project(':CommChannel').projectDir = new File('GeeUIComponents/CommChannel')

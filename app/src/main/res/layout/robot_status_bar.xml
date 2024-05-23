@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_status"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:background="@android:color/transparent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+<!--    <TextView-->
+<!--        android:id="@+id/bottom_part"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:gravity="center_horizontal"-->
+<!--        android:layout_centerInParent="true"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:textColor="@color/white50"-->
+<!--        android:layout_marginBottom="75px"-->
+<!--        android:textSize="25sp"-->
+<!--        android:visibility="visible"/>-->
+
+
+<!--    <com.letianpai.robot.control.floating.statusbar.NoWiFiNoticeView-->
+<!--        android:id="@+id/noWiFiNoticeView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:visibility="gone"/>-->
+
+    <LinearLayout
+        android:id="@+id/ll_title_part"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@android:color/transparent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/rl_title_part"
+            android:layout_width="match_parent"
+            android:layout_height="78px"
+            android:layout_gravity="center_horizontal"
+            android:paddingStart="10dp"
+            android:layout_marginLeft="110px"
+            android:layout_marginRight="110px"
+            android:background="@android:color/transparent"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="horizontal"
+            android:paddingTop="6dp">
+
+            <ImageView
+                android:id="@+id/title_part"
+                android:layout_width="24px"
+                android:layout_height="24px"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="-5dp"
+                android:layout_marginRight="10px"
+                android:src="@drawable/no_network"
+                android:background="@android:color/transparent"
+                android:visibility="gone"/>
+
+            <com.letianpai.robot.control.floating.statusbar.BatteryCharging
+                android:id="@+id/bcCharging"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:visibility="gone"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>
