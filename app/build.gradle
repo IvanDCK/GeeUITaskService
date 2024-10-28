@@ -1,20 +1,21 @@
 plugins {
     id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
 }
 
 android {
     namespace 'com.letianpai.robot.taskservice'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.letianpai.robot.taskservice"
         minSdk 26
-        targetSdk 33
+        targetSdk 34
         versionCode 24042501
         versionName "1.1." + versionCode
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
+    /*
     signingConfigs {
         config {
             storeFile file('../keystore/letianpai.jks')
@@ -23,16 +24,19 @@ android {
             storePassword 'letianpai0801'
         }
     }
+     */
+
+
 
     buildTypes {
         debug {
-            signingConfig signingConfigs.config
+            //signingConfig signingConfigs.config
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
         }
         release {
-            signingConfig signingConfigs.config
+            //signingConfig signingConfigs.config
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -42,20 +46,24 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 }
 
 dependencies {
 
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.android.material:material:1.5.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
-    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
-    implementation 'com.squareup.okio:okio:1.13.0'
-    implementation project(':CommandLib')
-    implementation project(':GestureFactory')
-    api "com.google.code.gson:gson:2.8.6"
-    implementation project(':Components')
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'com.squareup.okhttp3:okhttp:4.12.0'
+    implementation 'com.squareup.okio:okio:3.9.1'
+    implementation project(path: ':CommandLib')
+    implementation project(path: ':GestureFactory')
+    implementation project(path: ':Components')
+    api "com.google.code.gson:gson:2.11.0"
     implementation project(':CommChannel')
+    implementation 'androidx.core:core-ktx:1.13.1'
 
     //集成xlog
 //    implementation 'com.elvishew:xlog:1.10.1'

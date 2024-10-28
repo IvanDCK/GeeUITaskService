@@ -16,9 +16,9 @@ rootProject.name = "GeeUITaskService"
 include ':app'
 include ':CommandLib'
 include ':GestureFactory'
-project(':CommandLib').projectDir = new File('GeeUIBase/CommandLib')
-project(':GestureFactory').projectDir = new File('GeeUIBase/GestureFactory')
+project(':CommandLib').projectDir = new File('../GeeUIBase/CommandLib')
+project(':GestureFactory').projectDir = new File('../GeeUIBase/GestureFactory')
 include ':Components'
-project(':Components').projectDir = new File('GeeUIComponents/Components')
+project(':Components').projectDir = new File('../GeeUIComponets/Components')
 include ':CommChannel'
-project(':CommChannel').projectDir = new File('GeeUIComponents/CommChannel')
+project(':CommChannel').projectDir = new File('../GeeUIComponets/CommChannel')
