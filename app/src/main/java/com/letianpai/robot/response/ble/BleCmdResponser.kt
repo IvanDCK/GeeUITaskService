@@ -27,7 +27,7 @@ class BleCmdResponser private constructor(private val mContext: Context) {
         data: String?,
         isNeedResponse: Boolean
     ) {
-        if (!SystemUtil.getRobotActivateStatus()) {
+        if (!SystemUtil.robotActivateStatus) {
             return
         }
         if (command == null) {

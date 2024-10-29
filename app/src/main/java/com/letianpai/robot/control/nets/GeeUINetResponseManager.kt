@@ -77,7 +77,7 @@ class GeeUINetResponseManager private constructor(context: Context) {
                     if (networkType == NetworkChangingUpdateCallback.NETWORK_TYPE_WIFI) {
                         displayInfo
                         //Network changes, synchronised data
-                        GeeUIStatusUploader.getInstance(mContext).syncRobotStatus()
+                        GeeUIStatusUploader.getInstance(mContext!!)!!.syncRobotStatus()
                     }
                 }
             })
@@ -99,7 +99,7 @@ class GeeUINetResponseManager private constructor(context: Context) {
 
     val encodeInfo: Unit
         get() {
-            if (SystemUtil.isInChinese()) {
+            if (SystemUtil.isInChinese) {
                 getEncodeInfo(true)
             } else {
                 getEncodeInfo(false)
@@ -132,9 +132,7 @@ class GeeUINetResponseManager private constructor(context: Context) {
                                     deviceInfo.data!!.hard_code
                                 ) && !TextUtils.isEmpty(deviceInfo.data!!.sn)
                             ) {
-                                SystemUtil.setHardCode(
-                                    deviceInfo.data!!.hard_code
-                                )
+                                SystemUtil.hardCode = deviceInfo.data!!.hard_code
                                 //                            getDisplayInfo();
                                 getDisplayInformation(1000)
                             }
@@ -165,7 +163,7 @@ class GeeUINetResponseManager private constructor(context: Context) {
         get() {
             GeeUiNetManager.getWeatherInfo(
                 mContext,
-                SystemFunctionUtil.Companion.isChinese,
+                SystemFunctionUtil.isChinese,
                 object : Callback {
                     override fun onFailure(call: Call, e: IOException) {
                     }

@@ -1,6 +1,7 @@
 package com.letianpai.robot.control.encryption
 
 import android.content.Context
+import android.os.Build
 import com.google.gson.Gson
 import com.letianpai.robot.components.network.system.SystemUtil
 import java.util.Locale
@@ -92,13 +93,35 @@ class EncryptionUtils private constructor(private val mContext: Context) {
         }
 
         val robotMac: String
+            get() = if (isEmulator()) {
+                "00:00:00:00:00:00"
+            } else {
+                SystemUtil.wlanMacAddress?.lowercase(Locale.getDefault()) ?: "00:00:00:00:00:00"
+            }
+
+        /*
+         val robotMac: String
             get() = (SystemUtil.getWlanMacAddress()).lowercase(
                 Locale.getDefault()
             )
+         */
 
         val ts: String
             get() {
                 return (System.currentTimeMillis() / 1000).toString() + ""
             }
+
+        private fun isEmulator(): Boolean {
+            return (Build.FINGERPRINT.startsWith("generic")
+                    || Build.FINGERPRINT.startsWith("unknown")
+                    || Build.MODEL.contains("google_sdk")
+                    || Build.MODEL.contains("Emulator")
+                    || Build.MODEL.contains("Android SDK built for x86")
+                    || Build.MANUFACTURER.contains("Genymotion")
+                    || Build.BRAND.startsWith("generic")
+                    || Build.DEVICE.startsWith("generic")
+                    || "google_sdk" == Build.PRODUCT)
+        }
     }
+
 }

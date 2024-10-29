@@ -19,6 +19,6 @@ include ':GestureFactory'
 project(':CommandLib').projectDir = new File('../GeeUIBase/CommandLib')
 project(':GestureFactory').projectDir = new File('../GeeUIBase/GestureFactory')
 include ':Components'
-project(':Components').projectDir = new File('../GeeUIComponets/Components')
+project(':Components').projectDir = new File('../GeeUIComponents/Components')
 include ':CommChannel'
-project(':CommChannel').projectDir = new File('../GeeUIComponets/CommChannel')
+project(':CommChannel').projectDir = new File('../GeeUIComponents/CommChannel')

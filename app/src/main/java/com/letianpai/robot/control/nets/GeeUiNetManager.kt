@@ -90,7 +90,7 @@ object GeeUiNetManager {
     fun getStock(context: Context?, callback: Callback?) {
         val ts: String = EncryptionUtils.ts
         val sn: String = Build.getSerial()
-        val hardCode: String = SystemUtil.getHardCode()
+        val hardCode: String = SystemUtil.hardCode.toString()
         //        String hardCode = "YMcQMMZc49ZM0M";
         val auth: String = EncryptionUtils.getRobotSign(sn, hardCode, ts)
 
@@ -104,7 +104,7 @@ object GeeUiNetManager {
      */
     fun getTipsList(context: Context?, callback: Callback?) {
         val hashMap: HashMap<String, String> = HashMap()
-        val sn: String = SystemUtil.getLtpSn()
+        val sn: String = SystemUtil.ltpSn
         hashMap[GeeUINetConsts.HASH_MAP_KEY_SN] = sn
         hashMap[GeeUINetConsts.HASH_MAP_KEY_CONFIG] = GeeUINetConsts.HASH_MAP_CONFIG_KEY_VALUE
         GeeUINetworkUtil.get(context, GeeUINetworkConsts.GET_COMMON_CONFIG, hashMap, callback)
@@ -245,7 +245,7 @@ object GeeUiNetManager {
     fun robotReset1(callback: Callback?) {
         val ts: String = EncryptionUtils.ts
         val sn: String = Build.getSerial()
-        val hardCode: String = SystemUtil.getHardCode()
+        val hardCode: String = SystemUtil.hardCode.toString()
         //        String hardCode = "YMcQMMZc49ZM0M";
         val auth: String = EncryptionUtils.getRobotSign(sn, hardCode, ts)
 

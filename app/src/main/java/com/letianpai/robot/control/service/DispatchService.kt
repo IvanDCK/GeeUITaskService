@@ -333,23 +333,23 @@ class DispatchService : Service() {
                             GeeUILogUtils.logi(
                                 "letianpai_recharging",
                                 "---reChargeInfo.data.getAutomatic_recharge_val() : " + reChargeInfo.data
-                                    .getAutomatic_recharge_val()
+                                    !!.automatic_recharge_val
                             )
                             GeeUILogUtils.logi(
                                 "letianpai_recharging",
                                 "---reChargeInfo.data.automatic_recharge_val: " + reChargeInfo.data
-                                    .automatic_recharge_val
+                                    !!.automatic_recharge_val
                             )
                             if (reChargeInfo != null && reChargeInfo.data != null && reChargeInfo.data
-                                    .getAutomatic_recharge_val() != 0
+                                !!.automatic_recharge_val != 0
                             ) {
                                 RobotConfigManager.getInstance(this@DispatchService)!!
                                     .setAutomaticRechargeSwitch(
-                                        reChargeInfo.data.automatic_recharge_val
+                                        reChargeInfo.data!!.automatic_recharge_val
                                     )
                                 RobotConfigManager.getInstance(this@DispatchService)!!
                                     .automaticRechargeVal = (
-                                        reChargeInfo.data.automatic_recharge_val
+                                        reChargeInfo.data!!.automatic_recharge_val
                                     )
                                 RobotConfigManager.getInstance(this@DispatchService)!!
                                     .commit()
@@ -376,7 +376,7 @@ class DispatchService : Service() {
             Thread {
                 com.letianpai.robot.components.network.nets.GeeUiNetManager.getReChargeConfig(
                     this@DispatchService,
-                    SystemUtil.isInChinese(),
+                    SystemUtil.isInChinese,
                     reChargeConfigCallback
                 )
             }.start()
@@ -420,9 +420,8 @@ class DispatchService : Service() {
                                         deviceInfo.data!!.sn
                                     )
                                 ) {
-                                    SystemUtil.setHardCode(
-                                        deviceInfo.data!!.hard_code
-                                    )
+                                    SystemUtil.hardCode = deviceInfo.data!!.hard_code
+
                                 }
                             }
                         } catch (e: Exception) {
@@ -466,11 +465,11 @@ class DispatchService : Service() {
                         ) {
 //                        updateRobotStatus(temp);
                             GeeUIStatusUploader.getInstance(this@DispatchService)
-                                .uploadRobotStatus()
+                                ?.uploadRobotStatus()
                             isLastTempHigh = true
                             return
                         }
-                        // 进入睡眠模式
+                        // Go to sleep mode
                         if (RobotModeManager.getInstance(this@DispatchService)
                                 .isCommonRobotMode ||
                             LetianpaiFunctionUtil.isVideoCallRunning(this@DispatchService) ||
@@ -506,7 +505,7 @@ class DispatchService : Service() {
                             isLastTempHigh = false
                         }
                         //                    updateRobotStatus(temp);
-                        GeeUIStatusUploader.getInstance(this@DispatchService).uploadRobotStatus()
+                        GeeUIStatusUploader.getInstance(this@DispatchService)!!.uploadRobotStatus()
                         if (RobotModeManager.getInstance(this@DispatchService)
                                 .isRobotDeepSleepMode
                         ) {
@@ -882,7 +881,7 @@ class DispatchService : Service() {
         command: String,
         data: String
     ) {
-        val robotActivate: Boolean = SystemUtil.getRobotActivateStatus()
+        val robotActivate: Boolean = SystemUtil.robotActivateStatus
         val isAppMode: Boolean =
             RobotModeManager.getInstance(this@DispatchService).isAppMode
         val isAlarm: Boolean = LetianpaiFunctionUtil.isAlarmOnTheTop(this@DispatchService)
@@ -902,7 +901,7 @@ class DispatchService : Service() {
         // if (!(robotActivate || (isAppMode && !isAlarm) || (isAppMode && isVideoCall) || (isAppMode && isVideoCallService))){
         //     return;
         // }
-        if (!SystemUtil.getRobotActivateStatus()
+        if (!SystemUtil.robotActivateStatus
             || ((RobotModeManager.getInstance(this@DispatchService).isAppMode))
             && (!LetianpaiFunctionUtil.isAlarmOnTheTop(this@DispatchService))
             && (!LetianpaiFunctionUtil.isVideoCallOnTheTop(this@DispatchService))
@@ -997,7 +996,7 @@ class DispatchService : Service() {
         command: String,
         data: String
     ) {
-        if (!SystemUtil.getRobotActivateStatus()) {
+        if (!SystemUtil.robotActivateStatus) {
             return
         }
         this.previousRobotStatus = this.robotStatus
@@ -1017,7 +1016,7 @@ class DispatchService : Service() {
         command: String,
         data: String
     ) {
-        if (!SystemUtil.getRobotActivateStatus()) {
+        if (!SystemUtil.robotActivateStatus) {
             return
         }
         this.previousRobotStatus = this.robotStatus
@@ -1041,7 +1040,7 @@ class DispatchService : Service() {
                     .commandDistribute(iLetianpaiService, command, data)
             } else {
 //                updateRobotStatus(TemperatureUpdateCallback.getInstance().getTemp());
-                GeeUIStatusUploader.getInstance(this@DispatchService).uploadRobotStatus()
+                GeeUIStatusUploader.getInstance(this@DispatchService)!!.uploadRobotStatus()
             }
         } else {
             RemoteCmdResponser.getInstance(this@DispatchService)
@@ -1623,7 +1622,7 @@ class DispatchService : Service() {
                     if (RobotStatusResponser.getInstance(this@DispatchService).isNoNeedResponseMode) {
                         return
                     }
-                    if (!SystemUtil.getRobotActivateStatus()) {
+                    if (!SystemUtil.robotActivateStatus) {
                         return
                     }
                     if ((!LetianpaiFunctionUtil.isVideoCallOnTheTop(this@DispatchService)) || (!LetianpaiFunctionUtil.isVideoCallServiceRunning(

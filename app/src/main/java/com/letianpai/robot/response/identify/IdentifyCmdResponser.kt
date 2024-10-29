@@ -29,7 +29,7 @@ class IdentifyCmdResponser private constructor(private val mContext: Context) {
     }
 
     fun commandDistribute(iLetianpaiService: ILetianpaiService, command: String?, data: String) {
-        if (!SystemUtil.getRobotActivateStatus()) {
+        if (!SystemUtil.robotActivateStatus) {
             return
         }
         if (command == null) {

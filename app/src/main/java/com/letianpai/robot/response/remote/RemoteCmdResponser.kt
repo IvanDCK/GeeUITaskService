@@ -234,7 +234,7 @@ class RemoteCmdResponser private constructor(private val mContext: Context) {
 
             RobotRemoteConsts.COMMAND_UPDATE_REAL_BATTERY -> GeeUIStatusUploader.getInstance(
                 mContext
-            ).uploadRobotStatusData()
+            )!!.uploadRobotStatusData()
 
             RobotRemoteConsts.COMMAND_UPDATE_AUTOMATIC_RECHARGE_CONFIG -> updateAutoChargingConfig(
                 data

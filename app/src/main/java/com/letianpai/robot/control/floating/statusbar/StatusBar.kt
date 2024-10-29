@@ -124,7 +124,7 @@ class StatusBar : RelativeLayout {
     }
 
     private fun showWifiStatus() {
-        val status: Boolean = WIFIConnectionManager.isWifiConnected()
+        val status: Boolean = WIFIConnectionManager.isWifiConnected
         GeeUILogUtils.logi(TAG, "setNoNetworkStatus_4_--status: $status")
         if (status) {
             hideNoNetworkStatus()
@@ -184,7 +184,7 @@ class StatusBar : RelativeLayout {
                 GeeUILogUtils.logi(TAG, "ChargingUpdateCallback_percent: " + percent)
                 GeeUILogUtils.logi(
                     TAG,
-                    "ChargingUpdateCallback_SystemUtil.getRobotActivateStatus(): " + SystemUtil.getRobotActivateStatus()
+                    "ChargingUpdateCallback_SystemUtil.robotActivateStatus: " + SystemUtil.robotActivateStatus
                 )
                 if (changingStatus) {
                     GeeUILogUtils.logi(TAG, "ChargingUpdateCallback_=========== 0010 ========== ")
@@ -206,11 +206,11 @@ class StatusBar : RelativeLayout {
                         setCharging(percent)
                     }
                     //If not activated, return
-                    if (!SystemUtil.getRobotActivateStatus()) {
+                    if (!SystemUtil.robotActivateStatus) {
                         return
                     }
 
-                    //                    if (changingStatus && (changingStatus != localChargingStatus) && SystemUtil.getRobotActivateStatus()) {
+                    //                    if (changingStatus && (changingStatus != localChargingStatus) && SystemUtil.robotActivateStatus) {
                     if (changingStatus && (changingStatus != localChargingStatus)) {
                         GeeUILogUtils.logi(
                             TAG,
@@ -279,7 +279,7 @@ class StatusBar : RelativeLayout {
                 mContext!!
             ).isRobotModeBeforeCharging()
         )
-        if (SystemUtil.getRobotActivateStatus() && RobotModeManager.getInstance(
+        if (SystemUtil.robotActivateStatus && RobotModeManager.getInstance(
                 mContext!!
             ).isRobotModeBeforeCharging()
         ) {
@@ -295,7 +295,7 @@ class StatusBar : RelativeLayout {
             RobotModeManager.Companion.getInstance(mContext!!).setRobotModeBeforeChargingOn(false)
         }
 
-        //        if (SystemUtil.getRobotActivateStatus()){
+        //        if (SystemUtil.robotActivateStatus){
 //            RobotModeManager.getInstance(mContext).switchRobotMode(ViewModeConsts.VM_STATIC_MODE, ViewModeConsts.APP_MODE_TIME);
 //        }
     }
@@ -317,7 +317,7 @@ class StatusBar : RelativeLayout {
 //                    openWifiConnectView();
 //                }
 
-                if (SystemUtil.getTitleTouchStatus() && SystemUtil.getRobotActivateStatus()) {
+                if (SystemUtil.titleTouchStatus && SystemUtil.robotActivateStatus) {
                     if (RobotStatusResponser.getInstance(mContext!!).isNoNeedResponseMode) {
                         return
                     }
@@ -334,7 +334,7 @@ class StatusBar : RelativeLayout {
                         openGeeUISettings()
                     }
                 }
-                //                if (SystemUtil.getTitleTouchStatus()){
+                //                if (SystemUtil.titleTouchStatus){
 //                    if (LetianpaiFunctionUtil.isDesktopAppOnTheTop(mContext)){
 //                        Log.e("letianpai","hahahahahahahahahahahahahahahahahahahahahahahah ============================================");
 //                        killAppByPackageName(mContext.getApplicationContext(), PackageConsts.PACKAGE_NAME_DESKTOP);
@@ -393,7 +393,7 @@ class StatusBar : RelativeLayout {
     fun setNoNetworkStatus() {
         GeeUILogUtils.logi(
             TAG,
-            "setNoNetworkStatus_1_---SystemUtil.getRobotStatus(): " + SystemUtil.getRobotStatus()
+            "setNoNetworkStatus_1_---SystemUtil.getRobotStatus(): " + SystemUtil.robotStatus
         )
         GeeUILogUtils.logi(
             TAG,
@@ -401,7 +401,7 @@ class StatusBar : RelativeLayout {
                 mContext
             )
         )
-        if (SystemUtil.getRobotStatus() && !NetWorkChangeReceiver.isWifiConnected(mContext)) {
+        if (SystemUtil.robotStatus && !NetWorkChangeReceiver.isWifiConnected(mContext)) {
             // noWiFiNoticeView.setVisibility(View.VISIBLE);
             noNetworkImage!!.setVisibility(VISIBLE)
             //You don't need to enter the time when you disconnect from the network,
@@ -532,7 +532,7 @@ class StatusBar : RelativeLayout {
     }
 
     fun showText(text: String?) {
-        if (!SystemUtil.getRobotActivateStatus()) {
+        if (!SystemUtil.robotActivateStatus) {
             return
         }
         val message = Message()
@@ -542,8 +542,8 @@ class StatusBar : RelativeLayout {
     }
 
     // public void updateBottomText(boolean isShowText) {
-    //     Log.e(TAG, " updateBottomText::isShowText: " + isShowText +"--SystemUtil.getRobotActivateStatus()--"+SystemUtil.getRobotActivateStatus());
-    //     if (isShowText && !SystemUtil.getRobotActivateStatus()) {
+    //     Log.e(TAG, " updateBottomText::isShowText: " + isShowText +"--SystemUtil.robotActivateStatus--"+SystemUtil.robotActivateStatus);
+    //     if (isShowText && !SystemUtil.robotActivateStatus) {
     //         return;
     //     }
     //     Message message = new Message();
